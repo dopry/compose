@@ -1,0 +1,26 @@
+# based on Circle CI implementation for Spotify Helios.
+# https://github.com/spotify/helios/blob/master/circle.yml
+
+machine:
+  pre:
+    - compose/circle.sh pre_machine
+  post:
+    - compose/circle.sh post_machine
+  # current installing docker in circle.sh pre_machine
+  # the circleci installed version is old.
+  # services:
+  #   - docker
+  environment:
+    DOCKER_HOST: tcp://127.0.0.1:2375
+    DOCKER: /usr/bin/docker
+
+test:
+  pre:
+    - ./circle.sh pre_test
+  post:
+    - ./circle.sh post_test
+
+general:
+  artifacts:
+    - artifacts
+    - /var/log/upstart/docker.log
