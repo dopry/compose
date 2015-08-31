@@ -14,8 +14,6 @@ case "$1" in
     docker_opts='DOCKER_OPTS="$DOCKER_OPTS -H tcp://0.0.0.0:2375"'
     sudo sh -c "echo '$docker_opts' >> /etc/default/docker"
 
-    DOCKER=`which docker`
-
     # install current docker releases
     sudo sh -c "curl -L -o /usr/bin/docker 'http://s3-external-1.amazonaws.com/circle-downloads/docker-1.8.1-circleci'"
     sudo sh -c "chmod 0755 /usr/bin/docker"
